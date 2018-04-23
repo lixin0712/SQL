@@ -1,0 +1,11 @@
+%matlab读取数据库数据              StockData数据库名，Wind_index表名
+conn = database('stock_data','sa','123456','com.microsoft.sqlserver.jdbc.SQLServerDriver','jdbc:sqlserver://198.16.102.88:1433;database=stock_data');
+curs =exec(conn,'select tradingday,c from Wind_index where code=''000300''');
+curs =fetch(curs);
+cur =curs.Data ;
+
+
+%写入数据库，StockData数据库库名         StockData数据库名，wind_index表名，先连接到Stockdata库，再创建wind_index表。
+%常用格式有   '[nvarchar](16) NULL'; '[int] NULL';'[float] NULL';'[nvarchar](32) NULL';
+conn = database('stock_data','sa','123456','com.microsoft.sqlserver.jdbc.SQLServerDriver','jdbc:sqlserver://198.16.102.88:1433;database=stock_data');
+create TABLE wind_index(bankuai [nvarchar](16) NULL,tradingday [int] NULL,exchange_id [nvarchar](16) NULL,code [nvarchar](16) NULL);
