@@ -14,8 +14,8 @@ datainsert(conn,col_nmae,str_bt,data);%插入数据，其中col_name是表名，
 
 %数据库操作
 select * from [stock_data].[dbo].[wind_index] where code='000300'  order by tradingday desc
-%StockData库的wind_index表，选择code=‘000300’的数据,按日期从大到小排序。
+%选取数据
 SELECT distinct[bankuai] ,[code] FROM [stock_data].[dbo].[wind_index]
-%选择StockData库wind_index表中，[bankuai]和[wind_index]两列不完全重复的数据。distinct必须放在select的后面
+%选择去重数据
 
 
