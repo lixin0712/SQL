@@ -5,7 +5,17 @@ curs =fetch(curs);
 cur =curs.Data ;
 
 
-%写入数据库，StockData数据库库名         StockData数据库名，wind_index表名，先连接到Stockdata库，再创建wind_index表。
+%matlab写入数据库          StockData数据库名，wind_index表名，先连接到Stockdata库，再创建wind_index表。
 %常用格式有   '[nvarchar](16) NULL'; '[int] NULL';'[float] NULL';'[nvarchar](32) NULL';
 conn = database('stock_data','sa','123456','com.microsoft.sqlserver.jdbc.SQLServerDriver','jdbc:sqlserver://198.16.102.88:1433;database=stock_data');
-create TABLE wind_index(bankuai [nvarchar](16) NULL,tradingday [int] NULL,exchange_id [nvarchar](16) NULL,code [nvarchar](16) NULL);
+exec(conn,create TABLE wind_index(bankuai [nvarchar](16) NULL,tradingday [int] NULL));%创建新的名为wind_index的表；对已创建的表写入不需这句。
+datainsert(conn,col_nmae,str_bt,data);%插入数据，其中col_name是表名，str_bt是列名如{'bankuai','tradingday','exchange_id','index_name'}
+
+
+%数据库操作
+select * from [stock_data].[dbo].[wind_index] where code='000300'  order by tradingday desc
+%StockData库的wind_index表，选择code=‘000300’的数据,按日期从大到小排序。
+SELECT distinct[bankuai] ,[code] FROM [stock_data].[dbo].[wind_index]
+%选择StockData库wind_index表中，[bankuai]和[wind_index]两列不完全重复的数据。distinct必须放在select的后面
+
+
