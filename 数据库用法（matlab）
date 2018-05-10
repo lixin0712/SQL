@@ -1,5 +1,6 @@
 %matlab读取数据库数据              StockData数据库名，Wind_index表名
 conn = database('stock_data','sa','123456','com.microsoft.sqlserver.jdbc.SQLServerDriver','jdbc:sqlserver://198.16.102.88:1433;database=stock_data');
+conn = database('test','sa','123456','com.microsoft.sqlserver.jdbc.SQLServerDriver','jdbc:sqlserver://localhost;database=test');
 curs =exec(conn,'select tradingday,c from Wind_index where code=''000300''');
 curs =fetch(curs);
 cur =curs.Data ;
