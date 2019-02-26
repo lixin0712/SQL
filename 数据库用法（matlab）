@@ -9,28 +9,12 @@ cur =curs.Data ;
 %matlab写入数据库          StockData数据库名，wind_index表名，先连接到Stockdata库，再创建wind_index表。
 %常用格式有   '[nvarchar](16) NULL'; '[int] NULL';'[float] NULL';'[nvarchar](32) NULL';
 conn = database('stock_data','sa','123456','com.microsoft.sqlserver.jdbc.SQLServerDriver','jdbc:sqlserver://198.16.102.88:1433;database=stock_data');
-%stri1 = '[nvarchar](16) NULL';
-%stri2 = '[int] NULL';
-%stri3 = '[float] NULL';
-%stri4 = '[nvarchar](32) NULL';
-%str_type = [1,2,1,1,1,3,3,3,3,3,3,2];
-%str_bt ={'bankuai','tradingday','exchange_id','index_name','code','o','h','l','c','v','trade_value','writing_day'};
-  for rowi = 1:length(str_bt)
-        if str_type(rowi) == 1
-            stri0 = stri1;
-        elseif str_type(rowi) == 2
-            stri0 = stri2;
-        else
-            stri0 = stri3;
-        end
-        stri_ = [stri_,str_bt{rowi},' ',stri0,','];
-    end
-stri_ = [stri_(1:end-1),');'];
-exec(conn,stri_);
+str_bt ={'bankuai','tradingday','exchange_id','index_name','code','o','h','l','c','v','trade_value','writing_day'};
+col_nmae='day'%表名
 datainsert(conn,col_nmae,str_bt,data);
 
-%exec(conn,create TABLE wind_index(bankuai [nvarchar](16) NULL,tradingday [int] NULL));%创建新的名为wind_index的表；对已创建的表写入不需这句。
-%datainsert(conn,col_nmae,str_bt,data);%插入数据，其中col_name是表名，str_bt是列名如{'bankuai','tradingday','exchange_id','index_name'}
+%exec(conn,'create TABLE wind_index(bankuai [nvarchar](16) NULL,tradingday [int] NULL)');%创建新的名为wind_index的表；对已创建的表写入不需这句。
+%datainsert(conn,col_nmae,str_bt,data);
 
 
 %数据库操作
