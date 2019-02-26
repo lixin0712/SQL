@@ -18,9 +18,10 @@ datainsert(conn,col_nmae,str_bt,data);
 
 
 %数据库操作
-select * from [stock_data].[dbo].[wind_index] where code='000300'  order by tradingday desc
-%选取数据
-SELECT distinct bankuai,code FROM [stock_data].[dbo].[wind_index]
+select * from wind_index where code='000300' order by tradingday desc
 %选择去重数据
-
-
+SELECT distinct bankuai,code FROM wind_index
+%匹配代码为000300，000301，000302...的指数，_代表单个字符
+select * from wind_index where code like '00030_'
+%匹配代码为567300，030661，130302...包含30的指数，%代表任意长度字符
+select * from wind_index where code like '%30%'
