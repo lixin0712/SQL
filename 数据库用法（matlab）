@@ -25,3 +25,12 @@ SELECT distinct bankuai,code FROM wind_index
 select * from wind_index where code like '00030_'
 %匹配代码为567300，030661，130302...包含30的指数，%代表任意长度字符
 select * from wind_index where code like '%30%'
+
+%内关联，跨表查询
+SELECT distinct day5.code,day5.tradingday,index_form.index_plate,lrb.OPER_REV
+FROM day5
+inner join index_form
+on day5.code=index_form.code 
+inner join lrb
+on day5.code=lrb.code
+where day5.tradingday=(select max(tradingday) from index_form) and index_form.index_plate='HS300'
